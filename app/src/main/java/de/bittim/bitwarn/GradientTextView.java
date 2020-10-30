@@ -45,6 +45,8 @@ public class GradientTextView extends AppCompatTextView {
         super.onLayout(changed, left, top, right, bottom);
 
         if(changed){
+            setTextColor(priCol);
+
             TextPaint paint = getPaint();
             Shader shader = new LinearGradient(0f, 0f, paint.measureText((String) getText()), getTextSize(),
                     new int[]{

@@ -4,15 +4,60 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/redAccent</item>
         <item name="colorPrimaryVariant">@color/red</item>
-        <item name="colorOnPrimary">@color/dark</item>
+        <item name="colorOnPrimary">@color/background</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blueAccent</item>
         <item name="colorSecondaryVariant">@color/blue</item>
-        <item name="colorOnSecondary">@color/dark</item>
+        <item name="colorOnSecondary">@color/foreground</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/dark</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="menu">
+        <item name="srcCompat">@drawable/menudark</item>
+    </style>
+
+    <style name="arrow">
+        <item name="srcCompat">@drawable/arrowdark</item>
+    </style>
+
+    <style name="button">
+        <item name="srcCompat">@drawable/btndark</item>
+        <item name="android:textColor">@color/foreground</item>
+    </style>
+
+    <style name="statusok">
+        <item name="srcCompat">@drawable/statusokdark</item>
+    </style>
+
+    <style name="statusflag">
+        <item name="srcCompat">@drawable/statusflagdark</item>
+    </style>
+
+    <style name="infook">
+        <item name="srcCompat">@drawable/btndark</item>
+        <item name="primaryColor">@color/blueAccent</item>
+        <item name="secondaryColor">@color/blue</item>
+    </style>
+
+    <style name="infoflag">
+        <item name="srcCompat">@drawable/btnbluedark</item>
+        <item name="primaryColor">@color/foreground</item>
+        <item name="secondaryColor">@color/foreground</item>
+    </style>
+
+    <style name="reportok">
+        <item name="srcCompat">@drawable/btnreddark</item>
+        <item name="primaryColor">@color/light</item>
+        <item name="secondaryColor">@color/light</item>
+    </style>
+
+    <style name="reportflag">
+        <item name="srcCompat">@drawable/btndark</item>
+        <item name="primaryColor">@color/redAccent</item>
+        <item name="secondaryColor">@color/red</item>
     </style>
 </resources>

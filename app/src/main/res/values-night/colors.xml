@@ -10,12 +10,12 @@
 
     <color name="light">#FFEAEBF3</color>
 
-    <color name="background">#FFEAEBF3</color>
-    <color name="foreground">#FF676767</color>
+    <color name="background">#FF676767</color>
+    <color name="foreground">#FFEAEBF3</color>
 
-    <color name="blue">#FF6859EA</color>
+    <color name="blue">#FFA89CFF</color>
     <color name="blueAccent">#FF6ACBE0</color>
 
-    <color name="red">#FFF50B9A</color>
+    <color name="red">#FF4DCA</color>
     <color name="redAccent">#FFFF839D</color>
 </resources>

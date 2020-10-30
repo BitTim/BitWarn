@@ -5,11 +5,12 @@
     android:id="@+id/ContraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/menuBtn"
+        style="@style/menu"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
@@ -21,11 +22,11 @@
         app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"
-        app:srcCompat="@drawable/menulight" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <ImageView
         android:id="@+id/status"
+        style="@style/statusok"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="32dp"
@@ -34,11 +35,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/statusoklight" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/infoBtn"
+        style="@style/infook"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -46,11 +47,11 @@
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintStart_toStartOf="@+id/status"
-        app:layout_constraintTop_toBottomOf="@+id/status"
-        app:srcCompat="@drawable/btnlight" />
+        app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <ImageView
         android:id="@+id/reportBtn"
+        style="@style/reportok"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -58,11 +59,11 @@
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/status"
-        app:layout_constraintTop_toBottomOf="@+id/status"
-        app:srcCompat="@drawable/btnredlight" />
+        app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <ImageView
         android:id="@+id/devicesBtn"
+        style="@style/button"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:scaleType="fitXY"
@@ -70,30 +71,28 @@
         android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/status"
         app:layout_constraintStart_toStartOf="@+id/status"
-        app:layout_constraintTop_toBottomOf="@+id/infoBtn"
-        app:srcCompat="@drawable/btnlight" />
+        app:layout_constraintTop_toBottomOf="@+id/infoBtn" />
 
     <de.bittim.bitwarn.GradientTextView
         android:id="@+id/moreInfo"
+        style="@style/infook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
         android:text="More Info"
         android:textSize="16sp"
-        app:primaryColor="@color/blueAccent"
-        app:secondaryColor="@color/blueDarker"
         app:layout_constraintBottom_toBottomOf="@+id/infoBtn"
         app:layout_constraintEnd_toEndOf="@+id/infoBtn"
         app:layout_constraintStart_toStartOf="@+id/infoBtn"
         app:layout_constraintTop_toTopOf="@+id/infoBtn" />
 
-    <TextView
+    <de.bittim.bitwarn.GradientTextView
         android:id="@+id/report"
+        style="@style/reportok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
         android:textSize="16sp"
-        android:textColor="@color/light"
         android:text="Report"
         app:layout_constraintBottom_toBottomOf="@+id/reportBtn"
         app:layout_constraintEnd_toEndOf="@+id/reportBtn"
@@ -102,6 +101,7 @@
 
     <TextView
         android:id="@+id/devices"
+        style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"

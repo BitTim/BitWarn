@@ -1,6 +1,7 @@
 package de.bittim.bitwarn;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
@@ -35,9 +36,8 @@ public class MainActivity extends AppCompatActivity
         initButtons();
 
         enableBT();
-        btDiscover();
 
-        applyTheme();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 
     public void initGUI()
@@ -72,24 +72,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     //================================
-    // Theme Stuff
-    //================================
-
-    public void applyTheme()
-    {
-        /*int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        switch (currentNightMode)
-        {
-            case Configuration.UI_MODE_NIGHT_NO:
-                // Night mode is not active, we're using the light theme
-                break;
-            case Configuration.UI_MODE_NIGHT_YES:
-                // Night mode is active, we're using dark theme
-                break;
-        }*/
-    }
-
-    //================================
     // Bluetooth Stuff
     //================================
 
@@ -109,6 +91,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     case BluetoothAdapter.STATE_OFF:
                         Log.d("MainActivity", "onReceive: Changed BT State to OFF");
+                        enableBT();
                         break;
                     case BluetoothAdapter.STATE_TURNING_OFF:
                         Log.d("MainActivity", "onReceive: Changed BT State to TURNING_OFF");
@@ -144,6 +127,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case BluetoothAdapter.SCAN_MODE_NONE:
                         Log.d("MainActivity", "onReceive: Changed Scan mode to NONE");
+                        btDiscover();
                         break;
                     case BluetoothAdapter.STATE_CONNECTING:
                         Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTING");
@@ -176,9 +160,15 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        unregisterReceiver(btStateReceiver);
-        unregisterReceiver(btScanReceiver);
-        unregisterReceiver(btFoundReceiver);
+
+        try { unregisterReceiver(btStateReceiver); }
+        catch (final Exception e) { }
+
+        try { unregisterReceiver(btScanReceiver); }
+        catch (final Exception e) { }
+
+        try { unregisterReceiver(btFoundReceiver); }
+        catch (final Exception e) { }
     }
 
     public void enableBT()
@@ -193,7 +183,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 120);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
 
         IntentFilter intentFilter = new IntentFilter(bt.ACTION_SCAN_MODE_CHANGED);
