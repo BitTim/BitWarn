@@ -9,14 +9,90 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
+    ImageView status, menuBtn, infoBtn, reportBtn, devicesBtn;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initGUI();
+        initButtons();
+
+        enableBT();
+        btDiscover();
+
+        applyTheme();
+    }
+
+    public void initGUI()
+    {
+        status = (ImageView) findViewById(R.id.status);
+    }
+
+    public void initButtons()
+    {
+        menuBtn = (ImageView) findViewById(R.id.menuBtn);
+        infoBtn = (ImageView) findViewById(R.id.infoBtn);
+        reportBtn = (ImageView) findViewById(R.id.reportBtn);
+        devicesBtn = (ImageView) findViewById(R.id.devicesBtn);
+
+        menuBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                onMenuBtn();
+            }
+        });
+
+        reportBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                status.setImageResource(R.drawable.statusflaglight);
+            }
+        });
+    }
+
+    private void onMenuBtn()
+    {
+        Intent i = new Intent(this, Menu.class);
+        startActivity(i);
+    }
+
+    //================================
+    // Theme Stuff
+    //================================
+
+    public void applyTheme()
+    {
+        /*int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode)
+        {
+            case Configuration.UI_MODE_NIGHT_NO:
+                // Night mode is not active, we're using the light theme
+                break;
+            case Configuration.UI_MODE_NIGHT_YES:
+                // Night mode is active, we're using dark theme
+                break;
+        }*/
+    }
+
+    //================================
+    // Bluetooth Stuff
+    //================================
+
     BluetoothAdapter bt = BluetoothAdapter.getDefaultAdapter();
     public ArrayList<BluetoothDevice> devices = new ArrayList<>();
 
@@ -32,12 +108,16 @@ public class MainActivity extends AppCompatActivity {
                 switch(state)
                 {
                     case BluetoothAdapter.STATE_OFF:
+                        Log.d("MainActivity", "onReceive: Changed BT State to OFF");
                         break;
                     case BluetoothAdapter.STATE_TURNING_OFF:
+                        Log.d("MainActivity", "onReceive: Changed BT State to TURNING_OFF");
                         break;
                     case BluetoothAdapter.STATE_ON:
+                        Log.d("MainActivity", "onReceive: Changed BT State to ON");
                         break;
                     case BluetoothAdapter.STATE_TURNING_ON:
+                        Log.d("MainActivity", "onReceive: Changed BT State to TURNING_ON");
                         break;
                 }
             }
@@ -57,14 +137,19 @@ public class MainActivity extends AppCompatActivity {
                 switch(mode)
                 {
                     case BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTABLE_DISCOVERABLE");
                         break;
                     case BluetoothAdapter.SCAN_MODE_CONNECTABLE:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTABLE");
                         break;
                     case BluetoothAdapter.SCAN_MODE_NONE:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to NONE");
                         break;
                     case BluetoothAdapter.STATE_CONNECTING:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTING");
                         break;
                     case BluetoothAdapter.STATE_CONNECTED:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTED");
                         break;
                 }
             }
@@ -96,16 +181,6 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(btFoundReceiver);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        enableBT();
-        btDiscover();
-    }
-
     public void enableBT()
     {
         if(!bt.isEnabled())
@@ -118,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 120);
         startActivity(discoverableIntent);
 
         IntentFilter intentFilter = new IntentFilter(bt.ACTION_SCAN_MODE_CHANGED);
@@ -127,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void btDiscover()
     {
+        Log.d("MainActivity", "btDiscover: Started Discovery");
         if(bt.isDiscovering()) bt.cancelDiscovery();
 
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
