@@ -24,6 +24,14 @@
         <item name="srcCompat">@drawable/arrowlight</item>
     </style>
 
+    <style name="list">
+        <item name="android:background">@drawable/listcontainerlight</item>
+    </style>
+
+    <style name="listEntry">
+        <item name="background">@drawable/btnlight</item>
+    </style>
+
     <style name="button">
         <item name="srcCompat">@drawable/btnlight</item>
         <item name="android:textColor">@color/foreground</item>
@@ -59,5 +67,13 @@
         <item name="srcCompat">@drawable/btnlight</item>
         <item name="primaryColor">@color/redAccent</item>
         <item name="secondaryColor">@color/red</item>
+    </style>
+
+    <style name="okbadge">
+        <item name="srcCompat">@drawable/okbadge</item>
+    </style>
+
+    <style name="flagbadge">
+        <item name="srcCompat">@drawable/flagbadge</item>
     </style>
 </resources>

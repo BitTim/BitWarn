@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/listEntry"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@drawable/btnlight"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <de.bittim.bitwarn.GradientTextView
+            android:id="@+id/name"
+            style="@style/button"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/regular"
+            app:primaryColor="@color/foreground"
+            app:secondaryColor="@color/foreground" />
+
+        <de.bittim.bitwarn.GradientTextView
+            android:id="@+id/time"
+            style="@style/button"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/thin"
+            app:primaryColor="@color/foreground"
+            app:secondaryColor="@color/foreground" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/badge"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="center"
+        app:srcCompat="@drawable/okbadge" />
+
+</LinearLayout>

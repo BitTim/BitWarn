@@ -24,6 +24,14 @@
         <item name="srcCompat">@drawable/arrowdark</item>
     </style>
 
+    <style name="list">
+        <item name="android:background">@drawable/listcontainerdark</item>
+    </style>
+
+    <style name="listEntry">
+        <item name="background">@drawable/btndark</item>
+    </style>
+
     <style name="button">
         <item name="srcCompat">@drawable/btndark</item>
         <item name="android:textColor">@color/foreground</item>

@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <ImageView
-        android:id="@+id/devicesBtn"
+        android:id="@+id/historyBtn"
         style="@style/button"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -107,9 +107,9 @@
         android:fontFamily="@font/bold"
         android:text="History"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/devicesBtn"
-        app:layout_constraintEnd_toEndOf="@+id/devicesBtn"
-        app:layout_constraintStart_toStartOf="@+id/devicesBtn"
-        app:layout_constraintTop_toTopOf="@+id/devicesBtn" />
+        app:layout_constraintBottom_toBottomOf="@+id/historyBtn"
+        app:layout_constraintEnd_toEndOf="@+id/historyBtn"
+        app:layout_constraintStart_toStartOf="@+id/historyBtn"
+        app:layout_constraintTop_toTopOf="@+id/historyBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
