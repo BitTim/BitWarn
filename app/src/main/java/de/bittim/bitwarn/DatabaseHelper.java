@@ -60,11 +60,13 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
             if((cal.get(Calendar.DAY_OF_MONTH) == timestamp.get(Calendar.DAY_OF_MONTH) &&
                     cal.get(Calendar.MONTH) == timestamp.get(Calendar.MONTH) &&
-                    cal.get(Calendar.YEAR) == timestamp.get(Calendar.YEAR)) &&
-                    mac.equals(c.getString(1)))
+                    cal.get(Calendar.YEAR) == timestamp.get(Calendar.YEAR)))
             {
-                Log.d(TAG, "addData: Updated device entry: " + name + " at " + mac);
-                update = c.getInt(0);
+                if(mac.equals(c.getString(1)))
+                {
+                    Log.d(TAG, "addData: Updated device entry: " + name + " at " + mac);
+                    update = c.getInt(0);
+                }
             }
         }
 

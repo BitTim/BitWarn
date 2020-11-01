@@ -28,6 +28,7 @@ public class CleanupReceiver extends BroadcastReceiver {
             float days = (float) diff / 1000f / 60f / 60f / 24f;
 
             if(days > 16) { dbh.removeData(c.getInt(0)); }
+            else { break; }
         }
     }
 }
