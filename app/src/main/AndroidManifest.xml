@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitWarn">
-
+        <activity android:name=".OnboardingActivity"></activity>
+        <activity android:name=".PermissionActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
@@ -27,6 +28,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".CleanupReceiver"/>
+        <receiver android:name=".CleanupReceiver" />
     </application>
+
 </manifest>

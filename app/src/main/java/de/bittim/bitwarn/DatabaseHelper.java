@@ -46,22 +46,25 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
     public boolean addData(String mac, String name)
     {
-        long cTime = Calendar.getInstance().getTimeInMillis();
+        Calendar cal = Calendar.getInstance();
+        long cTime = cal.getTimeInMillis();
+        int update = -1;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor c = getData();
         while(c.moveToNext())
         {
-            Date timestamp = new Date(c.getLong(3));
-            long diff = cTime - timestamp.getTime();
-            float days = (float) diff / 1000f / 60f / 60f / 24f;
+            Calendar timestamp = Calendar.getInstance();
+            timestamp.setTimeInMillis(c.getLong(3));
 
-            Log.d(TAG, "addData: Checking for previous entries: New MAC " + mac + ", Old MAC " + c.getString(1) + ", Day difference: " + days);
-            if(days <= 1.0f && mac.equals(c.getString(1)))
+            if((cal.get(Calendar.DAY_OF_MONTH) == timestamp.get(Calendar.DAY_OF_MONTH) &&
+                    cal.get(Calendar.MONTH) == timestamp.get(Calendar.MONTH) &&
+                    cal.get(Calendar.YEAR) == timestamp.get(Calendar.YEAR)) &&
+                    mac.equals(c.getString(1)))
             {
-                Log.d(TAG, "addData: Tried to add same device multiple times: " + mac);
-                return false;
+                Log.d(TAG, "addData: Updated device entry: " + name + " at " + mac);
+                update = c.getInt(0);
             }
         }
 
@@ -72,8 +75,17 @@ public class DatabaseHelper extends SQLiteOpenHelper
         contentValues.put(COL4, cTime);
         contentValues.put(COL5, false);
 
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        Log.d(TAG, "addData: Added " + mac + " " + name + " to " + TABLE_NAME);
+        long result = -1;
+        if(update > -1)
+        {
+            result = db.update(TABLE_NAME, contentValues, COL1 + "=" + update, null);
+            Log.d(TAG, "addData: Updated " + mac + " " + name + " in " + TABLE_NAME);
+        }
+        else
+        {
+            result = db.insert(TABLE_NAME, null, contentValues);
+            Log.d(TAG, "addData: Added " + mac + " " + name + " to " + TABLE_NAME);
+        }
 
         return result != -1;
     }

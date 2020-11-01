@@ -29,7 +29,7 @@
     </style>
 
     <style name="listEntry">
-        <item name="background">@drawable/btndark</item>
+        <item name="android:background">@drawable/btndark</item>
     </style>
 
     <style name="button">
