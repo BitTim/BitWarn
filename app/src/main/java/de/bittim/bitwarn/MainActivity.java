@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity
         scheduleAlarm();
 
         enableBT();
-        btDiscover();
     }
 
     public void initGUI()
@@ -134,11 +133,47 @@ public class MainActivity extends AppCompatActivity
             }
         }
     };
+    
+    private final BroadcastReceiver btScanReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            final String action = intent.getAction();
+
+            if(action.equals(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED))
+            {
+                final int mode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, BluetoothAdapter.ERROR);
+
+                switch(mode)
+                {
+                    case BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTABLE_DISCOVERABLE");
+                        break;
+                    case BluetoothAdapter.SCAN_MODE_CONNECTABLE:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTABLE");
+                        break;
+                    case BluetoothAdapter.SCAN_MODE_NONE:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to NONE");
+                        btDiscover();
+                        break;
+                    case BluetoothAdapter.STATE_CONNECTING:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTING");
+                        break;
+                    case BluetoothAdapter.STATE_CONNECTED:
+                        Log.d("MainActivity", "onReceive: Changed Scan mode to CONNECTED");
+                        break;
+                }
+            }
+        }
+    };
 
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
+        
+        try { unregisterReceiver(btScanReceiver); }
+        catch (final Exception e) { }
 
         try { unregisterReceiver(btFoundReceiver); }
         catch (final Exception e) { }
@@ -155,6 +190,11 @@ public class MainActivity extends AppCompatActivity
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
         startActivity(discoverableIntent);
+        
+        IntentFilter intentFilter = new IntentFilter(bt.ACTION_SCAN_MODE_CHANGED);
+        registerReceiver(btScanReceiver, intentFilter);
+        
+        btDiscover();
     }
 
     public void btDiscover()
