@@ -68,6 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                     update = c.getInt(0);
                 }
             }
+            else { break; }
         }
 
         ContentValues contentValues = new ContentValues();
